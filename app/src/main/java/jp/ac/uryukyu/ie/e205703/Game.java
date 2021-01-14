@@ -1,16 +1,31 @@
 package jp.ac.uryukyu.ie.e205703;
 
 import java.util.*;
-
+/** @author
+ * Gameクラス
+ ランダムで配布された相手のカードを選び数字と倍率の異なるアルファベットで得点を争う
+ */
 public class Game {
+    /**
+     * static List <String> bot = new ArrayList<>(); //botのカード一覧
+    static List <String> player = new ArrayList<>();//playerのカード一覧（持ち札）
+    static boolean Continue = true;　//ゲーム続行可能か
+    static boolean Continue_player = true;　//playerのターンかbotのターンを示す
+    static int sum_bot = 0;  //
+    static int sum_player = 0;//
+    */
     static List <String> bot = new ArrayList<>();
     static List <String> player = new ArrayList<>();
     static boolean Continue = true;
-    //static boolean Continu_bot = true;
     static boolean Continue_player = true;
     static int sum_bot = 0;
     static int sum_player = 0;
 
+    /**
+     * メソッドを繋げて本ゲームを動かすメソッド
+     * 標準入力を受け取る
+     * １ターンごとの処理を書いているメソッドを条件を満たす限り続ける
+     */
     public static void play_game(){
         Distribute_card();
     while(Continue){
@@ -38,6 +53,8 @@ public class Game {
     Judgment();
 }
 
+    /**勝者判定するメソッド
+     */
     public static void Judgment(){
         System.out.println("あなたのポイント数:"+sum_player);
         System.out.println("相手のポイント数:"+sum_bot);
@@ -50,6 +67,11 @@ public class Game {
         }
     }
 
+    /**現時点でのポイントを表示するメソッド
+     *  @param sum プレイヤーの加算ポイント
+     * calメソッドからの引数を受けとる
+     * 獲得ポイントと合計ポイントを表示
+     * */ 
     public static void Sum(int sum){
         if (Continue_player){
             sum_player +=sum;
@@ -63,11 +85,17 @@ public class Game {
         }
     }
 
+    /**
+     * 得点を計算するメソッド
+     * アルファベットと数字（倍率）をそれぞれ取り出して得点化する
+     * @param index 手札から受け取った値
+     * @return ポイントを計算した結果を返す
+     */
     public static int cal(String index){
         int goukei = 0;
         if (index.equals("Joker")){
-            goukei+=30;
-        }else{
+            return goukei+=30;
+        }else if (player.contains(index) || bot.contains(index)){
         String i = index.replaceAll("[^A-Za-z]","");
         String h = index.replaceAll("[^\\d]","");
         int dis_num = Integer.parseInt(h);
@@ -87,6 +115,10 @@ public class Game {
     return goukei;
     }
 
+    /**
+     * botのカードを見せるメソッド
+     * 相手に見られてはいけないので全て[?]で出力される
+     */
     public static void show_bot(){
         if (bot.size() ==0){
             Continue = false;
@@ -99,6 +131,9 @@ public class Game {
     }
     }
 
+    /**
+     * player自身の手札をみることができるメソッド
+     */
     public static void show_player(){
         if (player.size() ==0){
             Continue = false;
@@ -112,6 +147,10 @@ public class Game {
     }   System.out.println();
     }
 
+    /**
+     * playerとbotにカードを配るメソッド
+     * 予め用意されたカードをランダムに両者に分配する
+     */
     public static void Distribute_card(){
         List <String> card = new ArrayList<>();
         for (String item : new String[]{"S1","S2","S3","S4","H1","H2","H3","H4","D1","D2","D3","D4","C1","C2","C3","C4","Joker",})
