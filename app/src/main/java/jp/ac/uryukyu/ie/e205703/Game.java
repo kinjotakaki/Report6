@@ -10,7 +10,7 @@ public class Game {
     static boolean Continue_player = true;
     static int sum_bot = 0;
     static int sum_player = 0;
-
+    
     public static void play_game(){
         Distribute_card();
     while(Continue){
@@ -37,7 +37,7 @@ public class Game {
     }     
     Judgment();
 }
-    
+
 
     public static void Judgment(){
         System.out.println("あなたのポイント数:"+sum_player);
