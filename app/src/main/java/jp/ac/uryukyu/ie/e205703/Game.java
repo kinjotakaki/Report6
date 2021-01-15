@@ -95,7 +95,7 @@ public class Game {
         int goukei = 0;
         if (index.equals("Joker")){
             return goukei+=30;
-        }else if (player.contains(index) || bot.contains(index)){
+        }else{ //if (player.contains(index) || bot.contains(index))
         String i = index.replaceAll("[^A-Za-z]","");
         String h = index.replaceAll("[^\\d]","");
         int dis_num = Integer.parseInt(h);
